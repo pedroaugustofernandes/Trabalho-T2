@@ -36,16 +36,11 @@ typedef enum {
 
 // função que coloca o teclado em modo cru
 // deve ser chamada no início do programa
-void tec_inicia(){
-  system("stty raw -echo min 0 time 1");
-}
+void tec_inicia();
 
 // função que devolve o teclado para o modo normal
 // deve ser chamada no final do programa
-void tec_fim(){
-  system("stty sane");
-}
-
+void tec_fim();
 // função que lê a próxima tecla digitada
 // retorna T_NADA se não houver tecla digitada
 tecla_t tec_tecla();

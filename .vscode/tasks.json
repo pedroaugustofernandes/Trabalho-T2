@@ -1,0 +1,28 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "type": "cppbuild",
+            "label": "Compilar Jogo 15",
+            "command": "gcc",
+            "args": [
+                "-Wall",
+                "-Wextra",
+                "-g3",
+                "${workspaceFolder}/trabalhoFinal.c",
+                "${workspaceFolder}/video.c",
+                "${workspaceFolder}/teclado.c",
+                "-o",
+                "${workspaceFolder}/output/trabalhoFinal"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": ["$gcc"],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
+    ]
+}
