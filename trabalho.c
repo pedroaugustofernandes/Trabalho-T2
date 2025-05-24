@@ -7,32 +7,49 @@
 #include <unistd.h> 
 #include <string.h>
 
-void impMat(int m[4][4]){
+void impMat(int m[4][4]) {
     vid_limpa();
     cor_t texto = {255, 255, 255};
     cor_t fundo = {0, 0, 0};
-    vid_cor_texto(texto);
+    cor_t paredes = {200, 120, 255};
     vid_cor_fundo(fundo);
-
+    vid_cor_texto(paredes);
+    
+    vid_imps("       ");
+    vid_imps("\u2554\u2550\u2550\u2550\u2566\u2550\u2550\u2550\u2566\u2550\u2550\u2550\u2566\u2550\u2550\u2550\u2557\n\r");  
     for (int i = 0; i < 4; i++) {
-        for (int j = 0; j < 4; j++) {
-            vid_pos((posicao_t){i+2, j*3+1});
-            if (m[i][j] == 0) {
-                vid_impc(' ');
-            } else {
-                int num = m[i][j];
-                if (num < 10) {
-                    vid_impc(' ');
-                    vid_impc('0' + num);
-                    vid_impc(' ');
-                } else {
-                    vid_impc('0' + (num/10));
-                    vid_impc('0' + (num%10));  
-                    vid_impc(' ');             
-                }
-            }
+        if(i > 0) {
+            vid_imps("       ");
+            vid_imps("\u2560\u2550\u2550\u2550\u256C\u2550\u2550\u2550\u256C\u2550\u2550\u2550\u256C\u2550\u2550\u2550\u2563\n\r");
         }
+        vid_imps("       ");
+        vid_imps("\u2551");
+        for (int j = 0; j < 4; j++) {
+            if (m[i][j] == 0) {
+                vid_cor_texto(texto);
+                vid_imps("   ");
+            } 
+            else if (m[i][j] < 10) {
+                vid_cor_texto(texto);
+                vid_imps(" ");
+                vid_impc('0' + m[i][j]);
+                vid_imps(" ");
+            } 
+            else {
+                vid_cor_texto(texto);
+                vid_impc('0' + (m[i][j] / 10));
+                vid_impc('0' + (m[i][j] % 10));
+                vid_imps(" ");
+            }
+            vid_cor_texto(paredes);
+            vid_imps("\u2551");
+        }
+        vid_imps("\n\r");
     }
+    
+    vid_imps("       ");
+    vid_imps("\u255A\u2550\u2550\u2550\u2569\u2550\u2550\u2550\u2569\u2550\u2550\u2550\u2569\u2550\u2550\u2550\u255D\n\r");
+    
     vid_atualiza();
 }
 
@@ -189,7 +206,11 @@ void jogar(){
     vid_atualiza();
 
     while (1){
-        vid_imps("Escolha para onde ir: ");
+        vid_imps("       ");
+        vid_imps("Escolha para onde ir:");
+        vid_imps(" \u2191 CIMA, \u2193 BAIXO, \u2190 ESQUERDA, \u2192 DIREITA\n\r");
+        vid_imps("       ");
+        vid_imps("END = sair, HOME = reiniciar\n\r");
         vid_atualiza();
         
         tecla_t esc = tec_tecla();
